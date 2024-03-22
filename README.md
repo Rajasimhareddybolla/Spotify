@@ -2,7 +2,6 @@
 
 By BOLLA RAJA SIMHA REDDY
 
-Video overview: <URL HERE>
 
 ## Scope
 
@@ -76,7 +75,7 @@ This provides a succinct overview of the entities, their attributes, relationshi
 
 ### Relationships
 
-![erd diagram](/spotify/images/raja.png)
+![erd diagram](/images/raja.png)
 
 ## Optimizations
 
@@ -115,11 +114,11 @@ These index optimizations are tailored to the specific needs of our music app, f
 
  ## DATA VISUALISATION
  1) predict_songs_per_year() : 
-        ![songs](/spotify/images/No_of_songs_prediction.png)  
+        ![songs](/images/No_of_songs_prediction.png)  
 
         
         gave the mechine learing model predictions for no of songs relesed vs year
  2) popularity() :  
-        ![songs](/spotify/images/popularity.png)  
+        ![songs](/images/popularity.png)  
  3) update(csv):
   file csv file as an argument and update our database by adding the columns in that specified path
