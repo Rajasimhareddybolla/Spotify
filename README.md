@@ -116,9 +116,11 @@ These index optimizations are tailored to the specific needs of our music app, f
  1) predict_songs_per_year() : 
         ![songs](/images/No_of_songs_prediction.png)  
 
-        
+ 2) predict_songs_per_year() : 
+        ![songs](/images/cubic.png)  
+    
         gave the mechine learing model predictions for no of songs relesed vs year
- 2) popularity() :  
+ 3) popularity() :  
         ![songs](/images/popularity.png)  
- 3) update(csv):
+ 4) update(csv):
   file csv file as an argument and update our database by adding the columns in that specified path

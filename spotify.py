@@ -1,8 +1,10 @@
 from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
 from cs50 import SQL
 import numpy as np
 import matplotlib.pyplot as plt
 db = SQL("sqlite:///spotify.db")
+poly = PolynomialFeatures(degree= 3)
 model = LinearRegression()
 
 def plot_popularity():
@@ -53,8 +55,34 @@ def predict_songs_per_year():
     plt.xlabel("year")
     plt.ylabel("no of songs relesed")
     plt.show()
-    
+def predict():
+    data = db.execute("""
+    SELECT count(*),year FROM SPOTIFY_SONGS GROUP BY year ORDER BY year ;
+    """)
+    year = np.array([x for x in range(1999,2020)])
+    no_of_songs = [y["count(*)"] for y in data ][1:-1]
+
+    # Create a PolynomialFeatures object with degree 3
+    poly = PolynomialFeatures(degree=3) # to convert that single var to polynomial 
+
+    x_poly = poly.fit_transform(year.reshape(-1,1)) # now it convert and result the poly
+    poly.fit(x_poly , no_of_songs)
+    lin2 = LinearRegression()
+    lin2.fit(x_poly , no_of_songs) # as we have polynomial feautures we can get no
+
+    # Visualising the Linear Regression results
+    plt.scatter(year, no_of_songs, color='blue')
+
+    # Transform the year array for prediction
+    year_poly_pred = poly.fit_transform(year.reshape(-1,1))
+    plt.plot(year, lin2.predict(year_poly_pred), color='red')
+    plt.title('Cubic Regression')
+    plt.xlabel('Year')
+    plt.ylabel('Number of Songs')
+
+    plt.show()
 def update(csv):
+    
     # hear csv is the file path including the .csv from root lib
     db.execute(" .import ? --csv songs",csv)
 # not enough data to implement
@@ -96,4 +124,4 @@ def update(csv):
 #     else:
 #         return "Other"
 
-plot_popularity()
+predict()
